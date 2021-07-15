@@ -43,7 +43,9 @@
             {{-- same functionality but with the auth directive --}}
             @auth
                 <li>
-                    <a href="#" class="p-3">My name</a>
+                    {{-- "name" is on attributes of the user returned object, so it can be accesed directly. --}}
+                    {{-- use dd(auth()->user()) in some root to checkout the attributes --}}
+                    <a href="#" class="p-3">{{ auth()->user()->name }}</a>
                 </li>
                 <li>
                     {{-- The reason for using this a form and button instead of an <a> tag, is to avoid csrf attacks, stopping users from accessing their accounts. --}}

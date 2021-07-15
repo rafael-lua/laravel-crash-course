@@ -10,7 +10,9 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard');
+    // ->middleware('auth');
 
 // ::class resolves in the namespace of the class
 // https://www.php.net/manual/en/language.oop5.constants.php

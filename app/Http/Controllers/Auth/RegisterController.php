@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+    public function __construct()
+    {
+        // If already signed in, no reason to be able to register. Guest redirects to home IF NOT a guest.
+        $this->middleware(['guest']);
+    }
+
     public function index()
     {
         return view('auth.register');
