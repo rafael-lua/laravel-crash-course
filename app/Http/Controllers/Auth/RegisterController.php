@@ -25,12 +25,15 @@ class RegisterController extends Controller
             'password' => 'required|confirmed',
         ]);
 
+        // The reason create didn't use $request->only() syntax, is because password needs to be hashed.
         User::create([
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
+
+        auth()->attempt($request->only('email', 'password'));
 
         return redirect()->route('dashboard');
     }
