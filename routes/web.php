@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -30,3 +31,7 @@ Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts');
 Route::post('/posts', [PostController::class, 'store']);
+
+// route model binding make it easier to map values passed to the controller, by using the name of the model in {} instead of an id for example.
+Route::post('/posts/{post}/likes', [PostLikeController::class, 'store'])->name('posts.likes');
+Route::delete('/posts/{post}/likes', [PostLikeController::class, 'destroy']);
