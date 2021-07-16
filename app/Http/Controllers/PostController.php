@@ -9,7 +9,9 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::get(); // eloquent returns a laravel collection of all posts
+        // $posts = Post::get(); // eloquent returns a laravel collection of all posts
+        
+        $posts = Post::paginate(5); // The paginate will only return this number of items from the database, so in case of millions, would save a lot of memory/time.
 
         return view('posts.index', [
             'posts' => $posts
