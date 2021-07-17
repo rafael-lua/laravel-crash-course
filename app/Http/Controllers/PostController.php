@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        // in this case we want to only use the auth for store and destroy.
+        $this->middleware(['auth'])->only(['store', 'destroy']);
+    }
+
     public function index()
     {
         // $posts = Post::get(); // eloquent returns a laravel collection of all posts
