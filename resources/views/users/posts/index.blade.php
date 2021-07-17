@@ -13,7 +13,7 @@
                 @if ($posts->count())
                     @foreach ($posts as $post)
                         {{-- x-NameOfComponent --}}
-                        <x-post :post="$post" />
+                        <x-post :post="$post" :showButton="true" />
                     @endforeach
 
                     {{ $posts->links() }}

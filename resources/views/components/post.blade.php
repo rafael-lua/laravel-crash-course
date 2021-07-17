@@ -1,4 +1,4 @@
-@props(['post' => $post])
+@props(['post' => $post, 'showButton' => $showButton])
 
 <div class="mb-4">
     {{-- since we not doing something with the relationship, we just want the properties, we don't use user as function. --}}
@@ -36,6 +36,10 @@
                 </form>
             @endif
         @endauth
+
+        @if ($showButton === true)
+            <a href="{{ route('posts.show', $post) }}" class="text-green-500 mr-1">Show</a>
+        @endif
 
         <span>{{ $post->likes->count() }} {{ Str::plural('like', $post->likes->count()) }}</span>
     </div>
