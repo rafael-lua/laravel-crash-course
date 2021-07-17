@@ -53,4 +53,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Like::class);
     }
+
+    // laravel/eloquent special relationship to access things from a distant model.
+    public function receivedLikes()
+    {
+        // Relationship can be read like so: "Has many LIKES through many POSTS"
+        return $this->hasManyThrough(Like::class, Post::class);
+    }
 }

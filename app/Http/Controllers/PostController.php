@@ -15,7 +15,10 @@ class PostController extends Controller
         
         // This is with eager loading to help mitigate N+1 problems (can check queries count with laravel debugbar)
         // "with" receives the relationships from the model, so it eager loads data from them before iterating through
-        $posts = Post::with(['user', 'likes'])->paginate(25);
+        // $posts = Post::with(['user', 'likes'])->paginate(25);
+
+        // "latest" is a shortcut for "orderBy('created_at', 'desc')"
+        $posts = Post::latest()->with(['user', 'likes'])->paginate(25);
 
         return view('posts.index', [
             'posts' => $posts
@@ -38,7 +41,15 @@ class PostController extends Controller
     }
 
     public function destroy(Post $post)
-    {
+    {   
+        // This can be better made using the laravel's authorization
+        // if (!$post->ownedBy(auth()->user())) {
+        //     // handle unauthorization here
+        // }
+        
+        // The user is already passed in by default, so you only need to pass the post.
+        $this->authorize('delete', $post);
+
         $post->delete();
 
         return back();

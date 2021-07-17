@@ -21,6 +21,12 @@ class Post extends Model
         return $this->likes->contains('user_id', $user->id);
     }
 
+    /* Moved to PostPolicy, so it is handled by the laravel's authorization */
+    // public function ownedBy(User $user)
+    // {
+    //     return $user->id === $this->user_id;
+    // }
+
     public function user()
     {
         return $this->belongsTo(User::class);
