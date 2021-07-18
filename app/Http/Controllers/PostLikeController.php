@@ -26,11 +26,16 @@ class PostLikeController extends Controller
             'user_id' => auth()->user()->id
         ]);
 
-        // using softDelete to only send email if the user didn't like the post before, so it doesn't spam.
-        if (!$post->likes()->onlyTrashed()->where('user_id', auth()->user()->id)->count()) {
-            // "to" can also be an email. Here will be email of the person who owns the post.
-            Mail::to($post->user)->send(new PostLiked(auth()->user(), $post));
+        // Since it is being deployed to heroku, and to avoid email spam in the mailtrap account, disable the email functionality on production.
+        $environment = getenv('APP_ENV');
+        if($environment === "local") {
+            // using softDelete to only send email if the user didn't like the post before, so it doesn't spam.
+            if (!$post->likes()->onlyTrashed()->where('user_id', auth()->user()->id)->count()) {
+                // "to" can also be an email. Here will be email of the person who owns the post.
+                Mail::to($post->user)->send(new PostLiked(auth()->user(), $post));
+            }
         }
+
 
         return back();
     }
