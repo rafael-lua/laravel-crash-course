@@ -6,8 +6,9 @@
         "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
-        "prod": "pnpm run production",
-        "production": "mix --production"
+        "prod": "npm run production",
+        "production": "mix --production",
+        "postinstall": "npm run prod"
     },
     "devDependencies": {
         "autoprefixer": "^10.3.1",
