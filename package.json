@@ -8,8 +8,7 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "postinstall": "npm run prod",
-        "heroku-postbuild": "php artisan migrate"
+        "postinstall": "npm run prod"
     },
     "devDependencies": {
         "autoprefixer": "^10.3.1",
